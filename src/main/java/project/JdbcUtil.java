@@ -15,7 +15,6 @@ import java.util.Map;
 import javax.xml.crypto.Data;
 
 
-
 //test
 public class JdbcUtil {
     public static Connection connectSql() throws ClassNotFoundException, SQLException {
@@ -325,7 +324,6 @@ public class JdbcUtil {
             res.put("orderid", String.valueOf(rs.getInt("orderid")));
             res.put("orderStartDate",rs.getString("orderStartDate"));
             res.put("vehiclePlate",rs.getString("vehiclePlate"));
-            res.put("price",rs.getString("price"));
             res.put("location",rs.getString("location"));
             res.put("issue",rs.getString("issue"));
             res.put("O_cusNum",rs.getString("O_cusNum"));
@@ -335,6 +333,8 @@ public class JdbcUtil {
             res.put("rating",rs.getString("rating"));
             res.put("payCardNum",rs.getString("payCardNum"));
             res.put("payType",rs.getString("payType"));
+            res.put("EstimatePayment",rs.getString("EstimatePayment"));
+            res.put("actualPayment",rs.getString("actualPayment"));
             String temp = JSONLIKE.myMap2JSON(res);
             temp1 += temp+",";
         }
