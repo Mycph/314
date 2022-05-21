@@ -32,12 +32,11 @@ public class Customer extends HttpServlet {
         Map<String, String> map = JSONLIKE.myJson(str);
 
         int                 uid      = Integer.parseInt(map.get("uid"));
-        String              username = map.get("name");
-        String              phone    = map.get("Phone");
+
         String              date     = map.get("Time");
         String              address  = map.get("Address");
         String              issue    = map.get("Value");
-        String              Review   = map.get("Review");
+
         String              Plate    = map.get("Plate");
 
         Map<String, String> res      = new HashMap<String, String>();

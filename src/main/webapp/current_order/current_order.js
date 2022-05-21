@@ -21,7 +21,7 @@ function refreshBtn() {
             document.getElementById("issue").innerHTML          = json.issue;
             document.getElementById("sstate").innerHTML         = json.sstate;
             document.getElementById("orderStartDate").innerHTML = json.orderStartDate;
-            document.getElementById("price").innerHTML          = json.price;
+            //document.getElementById("price").innerHTML          = json.EstimatePayment;
             if (json.sstate == "Finished") {
                 document.getElementById("pay").style.display = "inline";
             } else {
