@@ -65,7 +65,7 @@ public class Payment extends HttpServlet {
             curOmap.put("actualPayment",curOmap.get("EstimatePayment"));
         }
 
-        System.out.println(curOmap);
+
         try {
             JdbcUtil.sqlOrderInsert(curOmap);
         } catch (SQLException e) {
