@@ -30,6 +30,7 @@ public class Payload extends HttpServlet {
         Map<String, String> map = JSONLIKE.myJson(str);
         String              oid = map.get("oid");
         Map<String, String> res = new HashMap<String, String>();
+        Map<String, String> show = new HashMap<String, String>();
         try {
             res = JdbcUtil.sqlcurOrderSelect(oid);
         } catch (SQLException e) {
@@ -37,10 +38,17 @@ public class Payload extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        String vip = res.get("isVip");
+        if(vip.equals("T")){
+            show.put("price","0");
+        }else{
+            show.put("price",res.get("EstimatePayment"));
+        }
+
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter pw   = resp.getWriter();
-        String      json = JSONLIKE.myMap2JSON(res);
+        String      json = JSONLIKE.myMap2JSON(show);
         System.out.println(json);
         System.out.println(json);
         pw.print(json);

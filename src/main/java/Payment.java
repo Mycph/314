@@ -44,14 +44,27 @@ public class Payment extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        curOmap.remove("cur_orderid");
-        map.remove("sstate");
-        curOmap.put("orderid", oid);
-        curOmap.put("payType", payType);
-        curOmap.put("payCardNum", payCardNum);
-        curOmap.put("star", star);
-        curOmap.put("comm", comm);
-        curOmap.put("orderEndDate", orderEndDate);
+//        curOmap.remove("cur_orderid");
+//        map.remove("sstate");
+        String vip = curOmap.get("isVip");
+        if(vip.equals("T")){
+            curOmap.put("orderid", oid);
+            curOmap.put("payType", payType);
+            curOmap.put("payCardNum", payCardNum);
+            curOmap.put("star", star);
+            curOmap.put("comm", comm);
+            curOmap.put("orderEndDate", orderEndDate);
+            curOmap.put("actualPayment","0");
+        }else{
+            curOmap.put("orderid", oid);
+            curOmap.put("payType", payType);
+            curOmap.put("payCardNum", payCardNum);
+            curOmap.put("star", star);
+            curOmap.put("comm", comm);
+            curOmap.put("orderEndDate", orderEndDate);
+            curOmap.put("actualPayment",curOmap.get("EstimatePayment"));
+        }
+
         System.out.println(curOmap);
         try {
             JdbcUtil.sqlOrderInsert(curOmap);

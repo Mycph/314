@@ -39,8 +39,7 @@ public class Customer extends HttpServlet {
         String              issue    = map.get("Value");
         String              Review   = map.get("Review");
         String              Plate    = map.get("Plate");
-        float               price    = 50;
-        float               vipPrice = 0;
+
         Map<String, String> res      = new HashMap<String, String>();
         try {
 
@@ -62,10 +61,12 @@ public class Customer extends HttpServlet {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+        String Vip="T";
+        String NotVip="F";
         //no vip
         if (compare < 0) {
             try {
-                JdbcUtil.sqlCurrOrderInsert(date, Plate, price, address, issue, String.valueOf(uid));
+                JdbcUtil.sqlCurrOrderInsert(date, Plate, address, issue, String.valueOf(uid),NotVip);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
@@ -73,7 +74,7 @@ public class Customer extends HttpServlet {
             }
         } else {
             try {
-                JdbcUtil.sqlCurrOrderInsert(date, Plate, vipPrice, address, issue, String.valueOf(uid));
+                JdbcUtil.sqlCurrOrderInsert(date, Plate, address, issue, String.valueOf(uid),Vip);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {

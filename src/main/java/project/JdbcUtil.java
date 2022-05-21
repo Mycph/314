@@ -146,12 +146,13 @@ public class JdbcUtil {
             res.put("cur_orderid", rs.getString("cur_orderid"));
             res.put("orderStartDate",rs.getString("orderStartDate"));
             res.put("vehiclePlate", rs.getString("vehiclePlate"));
-            res.put("price",rs.getString("price"));
+            res.put("EstimatePayment",rs.getString("EstimatePayment"));
             res.put("c_location", rs.getString("c_location"));
             res.put("issue",rs.getString("issue"));
             res.put("O_cusNum",rs.getString("O_cusNum"));
             res.put("O_proNum",rs.getString("O_proNum"));
             res.put("sstate",rs.getString("sstate"));
+            res.put("isVip",rs.getString("isVip"));
         }
         return res;
     }
@@ -291,7 +292,6 @@ public class JdbcUtil {
             res.put("orderid", String.valueOf(rs.getInt("orderid")));
             res.put("orderStartDate",rs.getString("orderStartDate"));
             res.put("vehiclePlate",rs.getString("vehiclePlate"));
-            res.put("price",rs.getString("price"));
             res.put("location",rs.getString("location"));
             res.put("issue",rs.getString("issue"));
             res.put("O_cusNum",rs.getString("O_cusNum"));
@@ -301,6 +301,9 @@ public class JdbcUtil {
             res.put("rating",rs.getString("rating"));
             res.put("payCardNum",rs.getString("payCardNum"));
             res.put("payType",rs.getString("payType"));
+            res.put("EstimatePayment",rs.getString("EstimatePayment"));
+            res.put("actualPayment",rs.getString("actualPayment"));
+
             String temp = JSONLIKE.myMap2JSON(res);
             temp1 += temp+",";
         }
@@ -341,18 +344,18 @@ public class JdbcUtil {
         System.out.println(temp1);
         return temp1;
     }
-    public static void sqlCurrOrderInsert(String orderStartDate, String vehiclePlate, float price, String c_location, String issue, String O_cusNum) throws SQLException, ClassNotFoundException {
+    public static void sqlCurrOrderInsert(String orderStartDate, String vehiclePlate, String c_location, String issue, String O_cusNum, String isVip) throws SQLException, ClassNotFoundException {
         Connection        con  = connectSql();
         String state = "waiting";
-        String            sql  = "insert into cur_orders (orderStartDate,vehiclePlate,price,c_location,issue,O_cusNum,sstate) values (?,?,?,?,?,?,?);";
+        String            sql  = "insert into cur_orders (orderStartDate,vehiclePlate,c_location,issue,O_cusNum,sstate,isVIP) values (?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, orderStartDate);
         psmt.setString(2, vehiclePlate);
-        psmt.setFloat(3, price);
-        psmt.setString(4, c_location);
-        psmt.setString(5, issue);
-        psmt.setString(6, O_cusNum);
-        psmt.setString(7, state);
+        psmt.setString(3, c_location);
+        psmt.setString(4, issue);
+        psmt.setString(5, O_cusNum);
+        psmt.setString(6, state);
+        psmt.setString(7, isVip);
 
         psmt.execute();
         con.close();
@@ -368,27 +371,29 @@ public class JdbcUtil {
         String orderEndDate = map.get("orderEndDate");
         String  orderStartDate = map.get("orderStartDate");
         String  vehiclePlate = map.get("vehiclePlate");
-        String  price = map.get("price");
         String  location = map.get("c_location");
         String  issue = map.get("issue");
         String  O_cusNum = map.get("O_cusNum");
         String  O_proNum = map.get("O_proNum");
+        String EstimatePayment = map.get("EstimatePayment");
+        String actualPayment = map.get("actualPayment");
 
-        String            sql  = "insert into orders values (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        String            sql  = "insert into orders values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, oid);
         psmt.setString(2, orderStartDate);
         psmt.setString(3, vehiclePlate);
-        psmt.setFloat(4, Float.parseFloat(price));
-        psmt.setString(5, location);
-        psmt.setString(6, issue);
-        psmt.setString(7, O_cusNum);
-        psmt.setString(8, O_proNum);
-        psmt.setString(9, orderEndDate);
-        psmt.setString(10, review);
-        psmt.setFloat(11, rating);
-        psmt.setString(12, payCardNum);
-        psmt.setString(13, payType);
+        psmt.setString(4, location);
+        psmt.setString(5, issue);
+        psmt.setString(6, O_cusNum);
+        psmt.setString(7, O_proNum);
+        psmt.setString(8, orderEndDate);
+        psmt.setString(9, review);
+        psmt.setFloat(10, rating);
+        psmt.setString(11, payCardNum);
+        psmt.setString(12, payType);
+        psmt.setString(13, EstimatePayment);
+        psmt.setString(14, actualPayment);
 
         psmt.execute();
         con.close();
