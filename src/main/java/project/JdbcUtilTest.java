@@ -22,6 +22,10 @@ class JdbcUtilTest {
         Map<String, String> res = JdbcUtil.sqlCusSelect(7);
         System.out.println(res);
     }
+    @Test
+    void test() throws SQLException, ClassNotFoundException {
+        JdbcUtil.sqlSetEstimatePayment("57","-34.41683578176796#150.888962");
+    }
 
     @Test
     void sqlProSelect() {

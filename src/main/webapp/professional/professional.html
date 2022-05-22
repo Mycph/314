@@ -33,6 +33,7 @@
             jsonObj.uid         = uid;
             jsonObj.coordinates = coordinates;
             req.send(JSON.stringify(jsonObj));
+            // receive response from server
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     console.log(req.response);

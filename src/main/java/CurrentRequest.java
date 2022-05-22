@@ -20,18 +20,18 @@ public class CurrentRequest extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("CurrentRequest in");
         BufferedReader bufferedReader = req.getReader();
-        StringBuilder  stringBuilder  = new StringBuilder();
-        String         line;
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line);
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String, String> map         = JSONLIKE.myJson(str);
-        String              requestID   = map.get("requestID");
-        String              pid         = map.get("pid");
-        String              coordinates = map.get("coordinates");
-        String              status      = map.get("status");
+        Map<String, String> map = JSONLIKE.myJson(str);
+        String requestID = map.get("requestID");
+        String pid = map.get("pid");
+        String coordinates = map.get("coordinates");
+        String status = map.get("status");
         try {
             JdbcUtil.updateCurrentOrder(requestID, pid, "processing");
         } catch (SQLException e) {
@@ -48,14 +48,24 @@ public class CurrentRequest extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        updatePrice(requestID, coordinates);
         System.out.println("select finish");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        PrintWriter pw   = resp.getWriter();
-        String      json = JSONLIKE.myMap2JSON(currentRequest);
+        PrintWriter pw = resp.getWriter();
+        String json = JSONLIKE.myMap2JSON(currentRequest);
         pw.print(json);
         pw.flush();
 
+    }
+    public void updatePrice(String requestID, String coordinates) {
+        try {
+            JdbcUtil.sqlSetEstimatePayment(requestID, coordinates);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

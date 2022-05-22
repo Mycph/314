@@ -155,20 +155,6 @@ public class JdbcUtil {
         }
         return res;
     }
-//    public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {
-//        Connection        conn = connectSql();
-//        String            sql  = "select * from VEHICLE where cusNum = ?";
-//        PreparedStatement psmt = conn.prepareStatement(sql);
-//        psmt.setInt(1, cusNum);
-//        ResultSet rs          = psmt.executeQuery();
-//        ArrayList vehicleList = new ArrayList<Vehicle>();
-//        while (rs.next()) {
-//            Vehicle vehicle = new Vehicle(rs.getString("plateNum"), rs.getString("model"));
-//            System.out.println(vehicle.getPlateNum());
-//            vehicleList.add(vehicle);
-//        }
-//        return vehicleList;
-//    }-34.4100062#150.8958423
     public static String sqlCurrOrderSelect(String address) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
         String            sql    = "select * from cur_orders,customer where sstate = 'waiting' and cur_orders.O_cusNum = customer.cusNum;";
@@ -192,6 +178,35 @@ public class JdbcUtil {
         System.out.println("this is JDBC: "+temp);
         return temp;
     }
+    public static void sqlSetEstimatePayment(String oid,String coordinates) throws SQLException, ClassNotFoundException {
+        Connection conn = connectSql();
+
+        String            sql  = "select * from cur_orders where cur_orderid =?;";
+        PreparedStatement psmt = conn.prepareStatement(sql);
+        psmt.setString(1,oid);
+        ResultSet    rs     = psmt.executeQuery();
+        String location = "";
+        while(rs.next()){
+            location = rs.getString("c_location");
+        }
+        // 上面的通了
+        System.out.println("this is oid: "+oid);
+        double price = setPrice(getDistance(coordinates,location));
+        float temp = (float)price;
+        // sql 语句不通
+        String newsql = "update cur_orders set EstimatePayment = ? where cur_orderid = ?;";
+        System.out.println("this is price: "+  temp);
+        Connection conn1 = connectSql();
+        PreparedStatement psmt1   = conn1.prepareStatement(newsql);
+        psmt1.setFloat(1,temp);
+        psmt1.setInt(2,Integer.parseInt(oid));
+        psmt1 = conn1.prepareStatement(newsql);
+        psmt1.execute();
+    }
+    public static double setPrice(double distance){
+        System.out.println("this is new method11111dqdqw");
+        return distance*15+50;
+    }
     public static Map sqlCurrentRequest(String address, String requestID) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
         String            sql    = "select * from cur_orders,customer where cur_orderid = ? and customer.cusNum = cur_orders.O_cusNum;";
@@ -212,7 +227,7 @@ public class JdbcUtil {
     private static double rad(double d){
         return d * Math.PI / 180.0;
     }
-    public static  double getDistance(String ca, String pa){
+    public static double getDistance(String ca, String pa){
         final  double EARTH_RADIUS = 6378.137;
         String[] caset = ca.split("#");
         double clon = Double.parseDouble(caset[0]);
