@@ -200,12 +200,11 @@ public class JdbcUtil {
         PreparedStatement psmt1   = conn1.prepareStatement(newsql);
         psmt1.setFloat(1,temp);
         psmt1.setInt(2,Integer.parseInt(oid));
-        psmt1 = conn1.prepareStatement(newsql);
         psmt1.execute();
     }
     public static double setPrice(double distance){
         System.out.println("this is new method11111dqdqw");
-        return distance*15+50;
+        return distance*15+30;
     }
     public static Map sqlCurrentRequest(String address, String requestID) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
