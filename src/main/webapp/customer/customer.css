@@ -77,10 +77,23 @@
 }
 
 .footer {
+    position:absolute;
     padding: 20px;
     text-align: center;
     background: #ddd;
     margin-top: 20px;
+    bottom:0;
+    width:97%;
+    height:20px;
+}
+main{
+    padding-bottom: 230px;
+}
+body{
+    min-height: 100%;
+    margin:0;
+    padding:0;
+    position:relative;
 }
 
 @media screen and (max-width: 800px) {

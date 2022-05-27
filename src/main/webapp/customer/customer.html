@@ -106,50 +106,50 @@
         </div>
     </div>
 </div>
-
-<div class="navbar">
-    <a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a> <!--user info-->
-    <a href="../renew/renew.html"><i class="main main-membership"></i>Membership</a> <!--membership-->
-    <a href="../order_history/order_history.html"><i class="main main-order"></i>Order History</a>
-</div>
-<div class="row">
-    <div class="left-part">
-        <h2>Please fill in the information below in detail to get help.</h2>
-        <label for="name">Your Name: </label>&nbsp;&nbsp;
-        <span id="name" name="name"></span><br><br>
-        <label for="phone">Phone number: </label>&nbsp;&nbsp;
-        <span id="phone" name="phone"></span><br><br>
-        <label for="time">Current time: </label>&nbsp;&nbsp;
-        <span id="time" name="time"></span><br><br>
-        <label for="address">Address: </label>&nbsp;&nbsp;
-        <input type="text" id="address" name="address" required/><br>
-        <button class="getLocation" onclick="getLocation()">Use current location</button>
-        <br><br>
-        <div id="map" style="display: none;">
-        </div>
-        <label for="car">Which of your vehicles needs assistance<br>(Please fill in the license plate
-            number.)</label>&nbsp;&nbsp;
-        <span id="car" name="choose"></span><br><br>
-        <label>Issue Type: </label>
-        <select id="issue" name="issue" required>
-            <option value="Flat Batteries">Flat Batteries</option>
-            <option value="Flat Tyres">Flat Tyres</option>
-            <option value="Towing">Towing</option>
-            <option value="Locked Out">Locked Out</option>
-            <option value="Emergency fuel delivery">Emergency fuel delivery</option>
-            <option value="other">Others</option>
-        </select><br><br>
-        <button onclick="cus1()">Submit</button>
+<main>
+    <div class="navbar">
+        <a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a> <!--user info-->
+        <a href="../renew/renew.html"><i class="main main-membership"></i>Membership</a> <!--membership-->
+        <a href="../order_history/order_history.html"><i class="main main-order"></i>Order History</a>
     </div>
+    <div class="row">
+        <div class="left-part">
+            <h2>Please fill in the information below in detail to get help.</h2>
+            <label for="name">Your Name: </label>&nbsp;&nbsp;
+            <span id="name" name="name"></span><br><br>
+            <label for="phone">Phone number: </label>&nbsp;&nbsp;
+            <span id="phone" name="phone"></span><br><br>
+            <label for="time">Current time: </label>&nbsp;&nbsp;
+            <span id="time" name="time"></span><br><br>
+            <label for="address">Address: </label>&nbsp;&nbsp;
+            <input type="text" id="address" name="address" required/><br>
+            <button class="getLocation" onclick="getLocation()">Use current location</button>
+            <br><br>
+            <div id="map" style="display: none;">
+            </div>
+            <label for="car">Which of your vehicles needs assistance<br>(Please fill in the license plate
+                number.)</label>&nbsp;&nbsp;
+            <span id="car" name="choose"></span><br><br>
+            <label>Issue Type: </label>
+            <select id="issue" name="issue" required>
+                <option value="Flat Batteries">Flat Batteries</option>
+                <option value="Flat Tyres">Flat Tyres</option>
+                <option value="Towing">Towing</option>
+                <option value="Locked Out">Locked Out</option>
+                <option value="Emergency fuel delivery">Emergency fuel delivery</option>
+                <option value="other">Others</option>
+            </select><br><br>
+            <button onclick="cus1()">Submit</button>
+        </div>
 
-    <div class="right-part">
-        <div class="cd">
-            <h2 id="test">About Me</h2>
-            <p id="hello">(Some introduction!!)</p>
+        <div class="right-part">
+            <div class="cd">
+                <h2 id="test">About Me</h2>
+                <p id="hello">Please enter your relevant information as required on the page. Once you have completed the form, click on the "Use current location" button to get your location, and then click on "Submit" to submit your request.</p>
+            </div>
         </div>
     </div>
-</div>
-
+</main>
 <div class="footer">
     (CSIT314)
 </div>
