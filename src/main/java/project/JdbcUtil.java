@@ -391,7 +391,6 @@ public class JdbcUtil {
         String  O_proNum = map.get("O_proNum");
         String EstimatePayment = map.get("EstimatePayment");
         String actualPayment = map.get("actualPayment");
-        System.out.println(map);
         String            sql  = "insert into orders values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, oid);
@@ -408,7 +407,7 @@ public class JdbcUtil {
         psmt.setString(12, payType);
         psmt.setString(13, EstimatePayment);
         psmt.setString(14, actualPayment);
-
+        System.out.println("database");
         psmt.execute();
         con.close();
     }
