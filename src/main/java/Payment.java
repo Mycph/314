@@ -64,10 +64,11 @@ public class Payment extends HttpServlet {
             curOmap.put("orderEndDate", orderEndDate);
             curOmap.put("actualPayment",curOmap.get("EstimatePayment"));
         }
-        System.out.println("in");
+
 
         try {
             JdbcUtil.sqlOrderInsert(curOmap);
+            System.out.println(curOmap);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

@@ -102,7 +102,7 @@ class JdbcUtilTest {
 
     @Test
     void sqlcurOrderIdSelect() throws SQLException, ClassNotFoundException{
-        Map<String, String> res = JdbcUtil.sqlcurOrderIdSelect(4);
+        Map<String, String> res = JdbcUtil.sqlcurOrderIdSelect(140);
         assertEquals(res.get("oid"), String.valueOf(63));
         System.out.println(res);
     }
@@ -326,9 +326,9 @@ class JdbcUtilTest {
 
     @Test
     void sqlCurrOrderInsert() throws SQLException, ClassNotFoundException {
-        JdbcUtil.sqlCurrOrderInsert("2012-05-01", "CH33875", "-34.416828#150.888962", "No", "1",  "Yes");
+        JdbcUtil.sqlCurrOrderInsert("2012-05-01", "CH33875", "-34.416828#150.888962", "No", "33",  "Yes");
         Map<String, String> expected = new HashMap<>();
-        expected = JdbcUtil.sqlcurOrderSelect(String.valueOf(66));
+        expected = JdbcUtil.sqlcurOrderSelect(String.valueOf(158));
 
         //2. Test size
         assertThat(expected.size(), is(10));
@@ -348,7 +348,7 @@ class JdbcUtilTest {
     @Test
     void sqlOrderInsert() throws SQLException, ClassNotFoundException {
         Map<String, String> map = new HashMap<>();
-        map.put("orderid", String.valueOf(10));
+        map.put("orderid", String.valueOf(158));
         map.put("orderStartDate", "2022-05-19");
         map.put("vehiclePlate", "C4PL88");
         map.put("c_location", "-34.419#150.8929");
