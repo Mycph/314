@@ -69,7 +69,7 @@ create trigger updateBal after insert
     on orders
     for each row
     begin
-        update Professional set balance =balance+ NEW.price*0.5 where proNum = NEW.O_proNum;
+        update Professional set balance =balance+ NEW.EstimatePayment*0.5 where proNum = NEW.O_proNum;
     end;
 
 create trigger updateplevel after insert
