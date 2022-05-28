@@ -20,8 +20,7 @@ function refreshBtn() {
             document.getElementById("vehicle").innerHTML        = json.vehiclePlate;
             document.getElementById("issue").innerHTML          = json.issue;
             document.getElementById("sstate").innerHTML         = json.sstate;
-            document.getElementById("orderStartDate").innerHTML = json.orderStartDate;
-            //document.getElementById("price").innerHTML          = json.EstimatePayment;
+            document.getElementById("price").innerHTML          = json.EstimatePayment;
             if (json.sstate == "Finished") {
                 document.getElementById("pay").style.display = "inline";
             } else {
