@@ -203,7 +203,6 @@ public class JdbcUtil {
         psmt1.execute();
     }
     public static double setPrice(double distance){
-        System.out.println("this is new method11111dqdqw");
         return distance*15+30;
     }
     public static Map sqlCurrentRequest(String address, String requestID) throws SQLException, ClassNotFoundException {
