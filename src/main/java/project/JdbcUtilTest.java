@@ -366,20 +366,4 @@ class JdbcUtilTest {
         // modify database
         JdbcUtil.sqlOrderInsert(map);
     }
-    @Test
-    void ins_cus_20() throws SQLException, ClassNotFoundException {
-        Faker faker = new Faker();
-        String name;
-        name = faker.name().username();
-        String DOB;
-        String email;
-        String phone;
-        String gender;
-        String plateNum;
-        String model;
-        System.out.println(name);
-        //System.out.println(pw);
-
-        //JdbcUtil.sqlCusInsert("war", "147258369", "2000-01-10", "160631231@gmail.com", "12345678", "male", "AC527UH","MAZDA");
-    }
 }
