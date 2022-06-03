@@ -15,7 +15,9 @@ function finishOrder() {
     jsonObj.status      = "finished";
     console.log(currequest_id);
     req.send(JSON.stringify(jsonObj));
-    window.open("../professional/professional.html", target = "_self");
+    req.addEventListener('error', event => {
+        console.error(event)
+    })
 }
 
 function payBtn() {
