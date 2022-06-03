@@ -86,13 +86,3 @@ create trigger delCurrOrder after insert
         delete from cur_orders where cur_orderid = New.orderid;
     end;
 
-
-
-drop trigger updateBal;
-
-drop table orders;
-drop table Vehicle;
-drop table customer;
-drop table cur_orders;
-
-drop table Professional;

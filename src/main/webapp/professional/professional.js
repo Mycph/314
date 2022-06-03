@@ -52,6 +52,6 @@ function showMap() {
 }
 
 function confirmRequest(requestID) {
-    document.cookie = "requestID=" + requestID + "; path=/CSIT314_war_exploded";
+    document.cookie = "requestID=" + requestID + "; path=/CSIT314_war";
     window.open("../current_request/current_request.html", target = "_self");
 }

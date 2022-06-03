@@ -21,7 +21,7 @@ public class JdbcUtil {
 
         // MySQL 8.0
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-        final String DB_URL      = "jdbc:mysql://192.168.0.13/CSIT314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        final String DB_URL      = "jdbc:mysql://localhost/csit314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
         final String USER = "william";
         final String PASS = "123456";
@@ -43,7 +43,7 @@ public class JdbcUtil {
 
     public static Map sqlCusSelect(int userID) throws SQLException, ClassNotFoundException {
         Connection        conn = connectSql();
-        String            sql  = "select * from Customer where cusNum = ?;";
+        String            sql  = "select * from CUSTOMER where cusNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setInt(1, userID);
         ResultSet rs     = psmt.executeQuery();
@@ -68,7 +68,7 @@ public class JdbcUtil {
 
     public static Map sqlProSelect(int userID) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
-        String            sql  = "select * from Professional where proNum = ?;";
+        String            sql  = "select * from PROFESSIONAL where proNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setInt(1, userID);
         ResultSet    rs     = psmt.executeQuery();
@@ -91,7 +91,7 @@ public class JdbcUtil {
     public static Map sqlCusLoginSelect(String username) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
         System.out.println("name = "+username);
-        String            sql  = "select cusPw,cusNum,vipEnd from Customer where cusName = ?;";
+        String            sql  = "select cusPw,cusNum,vipEnd from CUSTOMER where cusName = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, username);
         ResultSet    rs     = psmt.executeQuery();
@@ -108,7 +108,7 @@ public class JdbcUtil {
     public static Map sqlProLoginSelect(String username) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
 
-        String            sql  = "select proPw,proNum from Professional where proName = ?;";
+        String            sql  = "select proPw,proNum from PROFESSIONAL where proName = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, username);
         ResultSet    rs     = psmt.executeQuery();
@@ -157,7 +157,7 @@ public class JdbcUtil {
     }
     public static String sqlCurrOrderSelect(String address) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
-        String            sql    = "select * from cur_orders,customer where sstate = 'waiting' and cur_orders.O_cusNum = customer.cusNum;";
+        String            sql    = "select * from cur_orders,CUSTOMER where sstate = 'waiting' and cur_orders.O_cusNum = CUSTOMER.cusNum;";
         PreparedStatement psmt   = conn.prepareStatement(sql);
         ResultSet  rs     = psmt.executeQuery();
         Map<String, String> res = new LinkedHashMap<String,String>();
@@ -207,7 +207,7 @@ public class JdbcUtil {
     }
     public static Map sqlCurrentRequest(String address, String requestID) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
-        String            sql    = "select * from cur_orders,customer where cur_orderid = ? and customer.cusNum = cur_orders.O_cusNum;";
+        String            sql    = "select * from cur_orders,CUSTOMER where cur_orderid = ? and CUSTOMER.cusNum = cur_orders.O_cusNum;";
         PreparedStatement psmt   = conn.prepareStatement(sql);
         psmt.setString(1,requestID);
         ResultSet  rs     = psmt.executeQuery();
@@ -460,7 +460,7 @@ public class JdbcUtil {
         String vehicleModel = map.get("model");
         System.out.println("New_userName = "+userName);
         String sql = "" +
-                     "update customer " +
+                     "update CUSTOMER " +
                      "set cusName=?,gender=?,cusDOB=?,phoneNum=?,cusPw=?,email=?,plateNum=?,vehicleModel=?" +
                      "where cusNum=?";
         //预编译sql语句
@@ -507,7 +507,7 @@ public class JdbcUtil {
         String email    = map.get("email");
         String location = map.get("location");
         String sql = "" +
-                     "update Professional " +
+                     "update PROFESSIONAL " +
                      "set proName=?,gender=?,proDOB=?,phoneNum=?,proPw=?,email=?,location=?" +
                      "where proNum=?";
 
@@ -563,7 +563,7 @@ public class JdbcUtil {
 
     public static void sqlUpdateVIP(String uid, String date) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
-        String            sql         = "update customer set vipEnd=? where cusNum=?";
+        String            sql         = "update CUSTOMER set vipEnd=? where cusNum=?";
         PreparedStatement psmt        = con.prepareStatement(sql);
         psmt.setString(1, date);
         psmt.setString(2, uid);
