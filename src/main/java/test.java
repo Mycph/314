@@ -22,6 +22,7 @@ public class test extends HttpServlet {
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line);
         }
+        String t = "";
         String str = stringBuilder.toString();
         System.out.println(str);
         Map<String, String> map = JSONLIKE.myJson(str);
