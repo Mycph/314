@@ -33,8 +33,6 @@ function modify() {
     req.open("POST", "UpdateCus", true);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify(jsonObj));
-
-    alert("修改成功");
     window.open("../user_info/user_info.html", target = "_self");
 }
 

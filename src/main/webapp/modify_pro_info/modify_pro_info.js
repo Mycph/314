@@ -35,7 +35,6 @@ function modify() {
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
             console.log(req.response);
-            alert("修改成功");
             window.open("../pro_user_info/pro_user_info.html", target = "_self");
         }
     }

@@ -14,14 +14,19 @@ function finishOrder() {
     jsonObj.coordinates = getCookie("coordinates");
     jsonObj.status      = "finished";
     console.log(currequest_id);
-    req.send(JSON.stringify(jsonObj));
     req.addEventListener('error', event => {
         console.error(event)
     })
+    req.onreadystatechange = function (){
+        console.log(req.readyState);
+        if(req.readyState === 4){
+            window.open("../professional/professional.html", "_self");
+        }
+    }
+    req.send(JSON.stringify(jsonObj));
+
 }
 
 function payBtn() {
     window.open("../payment/payment.html")
 }
-
-
